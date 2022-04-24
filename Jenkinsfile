@@ -16,7 +16,7 @@ pipeline {
         stage("test") {
             steps {
                 script {
-                    gv.something()
+                    gv.bump_bundle_version_and_create_pr_to_ios_enterprise_app()
                 }
                 echo 'testing the application'
             }
