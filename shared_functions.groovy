@@ -1,6 +1,6 @@
 def bumpVersionXmlFile() {
   def parser = getXmlParser()
-  def xmlFile = new File('/tmp/browserstack-cd/enterpriseDummy/Info.plist')
+  def xmlFile = new File('Info.plist')
   def parse = parser.parse(xmlFile)
   String newVersion = (Float.valueOf(parse.dict.string[7].text()) + 1.0).toString
   parse.dict.string[7].value = newVersion
@@ -9,7 +9,6 @@ def bumpVersionXmlFile() {
 }
 
 def bump_bundle_version_and_create_pr_to_ios_enterprise_app(String old_version, String new_version) {
-    env.GIT_TOKEN = "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"
     env.branch_name = "AL_4809" + "_" + "bump_CFBundleVersion"
     env.message = "bumping up bundle version"
     env.newInfoFile = bumpVersionXmlFile()
