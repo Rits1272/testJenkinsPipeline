@@ -9,16 +9,10 @@ def bumpVersionXmlFile() {
 }
 
 def bump_bundle_version_and_create_pr_to_ios_enterprise_app(String old_version, String new_version) {
-    env.GIT_TOKEN="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"
+    env.GIT_TOKEN = "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"
     env.branch_name = "AL_4809" + "_" + "bump_CFBundleVersion"
     env.message = "bumping up bundle version"
     env.newInfoFile = bumpVersionXmlFile()
-    sh '''
-    cd /Users/ritik/testJenkinsPipeline
-    git checkout -b ${branch_name}
-    git commit -m ${message}
-    git push origin ${branch_name}
-    '''
     // sh '''
     // cd /tmp/ios-enterprise-app
     // git checkout -b ${branch_name}
