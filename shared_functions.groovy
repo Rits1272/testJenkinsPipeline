@@ -1,5 +1,4 @@
-import groovy.xml.XmlParser
-import groovy.xml.XmlUtil
+
 
 def getXmlParser() {
   def parser = new XmlParser()
