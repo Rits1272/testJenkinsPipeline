@@ -5,7 +5,9 @@ pipeline {
         
         stage("build") {
             steps {
-                echo 'building the application'
+                script {
+                    shared_functions.bump_bundle_version_and_create_pr_to_ios_enterprise_app
+                }
             }
         }
 
