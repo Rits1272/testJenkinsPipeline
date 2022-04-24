@@ -1,3 +1,6 @@
+import groovy.xml.XmlParser
+import groovy.xml.XmlUtil
+
 def getXmlParser() {
   def parser = new XmlParser()
   parser.setFeature("http://apache.org/xml/features/disallow-doctype-decl", false)
@@ -7,9 +10,9 @@ def getXmlParser() {
 
 def bumpVersionXmlFile() {
   def parser = getXmlParser()
-  def xmlFile = new File('/Users/ritik/Info.plist')
+  def xmlFile = new File('/Users/ritik/testJenkinsPipeline/Info.plist')
   def parse = parser.parse(xmlFile)
-  String newVersion = (Float.valueOf(parse.dict.string[7].text()) + 1.0).toString
+  String newVersion = String.valueOf(Float.valueOf(parse.dict.string[7].text()) + 1.0)
   parse.dict.string[7].value = newVersion
   parse.dict.string[8].value = newVersion
   return XmlUtil.serialize(parse)
@@ -40,3 +43,5 @@ def bump_bundle_version_and_create_pr_to_ios_enterprise_app(String old_version, 
     //   echo $response
     //  '''
 }
+
+println bumpVersionXmlFile()
