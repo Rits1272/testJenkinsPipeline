@@ -1,6 +1,6 @@
 def bumpVersionXmlFile() {
   def parser = getXmlParser()
-  def xmlFile = new File('Info.plist')
+  def xmlFile = new File('/Users/ritik/Info.plist')
   def parse = parser.parse(xmlFile)
   String newVersion = (Float.valueOf(parse.dict.string[7].text()) + 1.0).toString
   parse.dict.string[7].value = newVersion
