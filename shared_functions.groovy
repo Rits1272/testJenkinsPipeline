@@ -9,31 +9,34 @@ def bumpVersionXmlFile() {
 }
 
 def bump_bundle_version_and_create_pr_to_ios_enterprise_app(String old_version, String new_version) {
-    if (env.GIT_TOKEN == null) {
-        vault_auth()
-        env.GIT_TOKEN = sh(script: "vault kv get -field=value /master/minion/github/api_developer_key", returnStdout: true).trim()
-    }
+    env.GIT_TOKEN="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"
     env.branch_name = "AL_4809" + "_" + "bump_CFBundleVersion"
     env.message = "bumping up bundle version"
     env.newInfoFile = bumpVersionXmlFile()
     sh '''
-    cd /tmp/ios-enterprise-app
+    cd /Users/ritik/testJenkinsPipeline
     git checkout -b ${branch_name}
-    echo ${env.newInfoFile} | tee /enterpriseDummy/Info.plist
-    git add enterpriseDummy/Info.plist
-    git commit -m "Automated commit: ${message}"
+    git commit -m ${message}
     git push origin ${branch_name}
-    set +x
-    response=$(curl -X POST -H "Accept: application/vnd.github.v3+json" https://${GIT_TOKEN}@api.github.ccom/repos/browserstack/ios-enterprise-app \
-    /pulls -d "$(cat <<EOF
-    {
-      "base": "master",
-      "head": "${branch_name}",
-      "title": "${message}",
-      "body": "Created by provision profile rotation job"
-    }
-    EOF
-    )" )
-      echo $response
-     '''
+    '''
+    // sh '''
+    // cd /tmp/ios-enterprise-app
+    // git checkout -b ${branch_name}
+    // echo ${env.newInfoFile} | tee /enterpriseDummy/Info.plist
+    // git add enterpriseDummy/Info.plist
+    // git commit -m "Automated commit: ${message}"
+    // git push origin ${branch_name}
+    // set +x
+    // response=$(curl -X POST -H "Accept: application/vnd.github.v3+json" https://${GIT_TOKEN}@api.github.ccom/repos/browserstack/ios-enterprise-app \
+    // /pulls -d "$(cat <<EOF
+    // {
+    //   "base": "master",
+    //   "head": "${branch_name}",
+    //   "title": "${message}",
+    //   "body": "Created by provision profile rotation job"
+    // }
+    // EOF
+    // )" )
+    //   echo $response
+    //  '''
 }
