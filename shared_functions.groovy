@@ -17,7 +17,7 @@ def bumpVersionXmlFile() {
   return XmlUtil.serialize(parse)
 }
 
-def bump_bundle_version_and_create_pr_to_ios_enterprise_app(String old_version, String new_version) {
+def bump_bundle_version_and_create_pr_to_ios_enterprise_app() {
     env.branch_name = "AL_4809" + "_" + "bump_CFBundleVersion"
     env.message = "bumping up bundle version"
     env.newInfoFile = bumpVersionXmlFile()
