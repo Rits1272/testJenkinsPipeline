@@ -1,3 +1,10 @@
+def getXmlParser() {
+  def parser = new XmlParser()
+  parser.setFeature("http://apache.org/xml/features/disallow-doctype-decl", false)
+  parser.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
+  return parser
+}
+
 def bumpVersionXmlFile() {
   def parser = getXmlParser()
   def xmlFile = new File('/Users/ritik/Info.plist')
